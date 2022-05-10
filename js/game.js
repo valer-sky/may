@@ -1,14 +1,21 @@
+"use strict";
 let gameField      = document.getElementById('field');
 let restartButton  = document.getElementById('restart');
 let stepsCounter   = document.getElementById('steps');
 let timerUI        = document.getElementById('timer');
 let cardViewInHTML = '<div class="card card_closed" data-status="closed"></div>';
-let cardsContent   = [1, 2, 3, 4, 5, 6, 7, 8];
+let cardsContent  = [1,2,3,4,5,6,7,8,9,10,11,12];
+    cardsContent = cardsContent.map((card) => {
+     let img = new Image();
+     img.src = `img/${card}.png`;
+      return img;
+    });
+
 let openedCards    = [];
 let complitedCards = 0;
 let paused         = false;
 
-// restartButton.hidden = true;
+restartButton.hidden = true;
 cardsContent = doubleCards(cardsContent);
 createCardsOnGameField(field);
 
@@ -44,8 +51,11 @@ gameField.onclick = function(e) {
 
   // clear openedCards array for next try
   openedCards = [];
+  let resultDisplay = document.querySelector('.result');
+  
 
   if (complitedCards === cardsContent.length) {
+    resultDisplay.textContent = `Congratulations! You found them all! Your time: ${timerUI.innerHTML} and your steps: ${stepsCounter.innerHTML}`;
     restartButton.hidden = false;
   }
 }
@@ -56,12 +66,13 @@ restart.onclick = function() {
   // create cards in HTML
   for (let i = 0; i < cardsContent.length; i++) {
     gameField.insertAdjacentHTML('beforeend', cardViewInHTML);
-    gameField.lastElementChild.innerHTML = cardsContent[i];
+    gameField.lastElementChild.innerHTML =  '<img class="card-image" src="' + cardsContent[i].getAttribute('src') + '">';
   }
   toggleTimer();
   stepsCounter.innerHTML = 0;
   complitedCards = 0;
   restartButton.hidden = true;
+  resultDisplay.textContent = 'hidden';
 }
 
 function openCard(target) {
@@ -93,7 +104,7 @@ function doubleCards(cardsContent) {
 function createCardsOnGameField(field) {
   for (let i = 0; i < cardsContent.length; i++) {
     field.insertAdjacentHTML('beforeend', cardViewInHTML);
-    field.lastElementChild.innerHTML = cardsContent[i];
+    gameField.lastElementChild.innerHTML =  '<img class="card-image" src="' + cardsContent[i].getAttribute('src') + '">';
   }
 }
 
@@ -140,3 +151,5 @@ function toggleTimer() {
   	timerUI.dataset.started = '';
   }
 }
+
+

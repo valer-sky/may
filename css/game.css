@@ -3,7 +3,7 @@
   }
   
   body {
-    background: #000;
+    background: rgb(224, 220, 220);
   }
   
   .info {
@@ -25,7 +25,7 @@
     flex-wrap: wrap;
     width: 200px;
     margin: 25px auto 0;
-    background: #567;
+    background: rgb(224, 227, 231);
   }
   
   .card {
