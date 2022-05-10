@@ -3,9 +3,17 @@
   }
   
   body {
-    background: rgb(224, 220, 220);
+    background: url(img/background.jpg);
   }
-  
+  .wrapper {
+    height: 100vh;
+	/* background: url(img/background.jpg); */
+	background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100vw 100vh;
+    overflow: hidden;
+}
   .info {
     display: inline-block;
     color: #fff;
